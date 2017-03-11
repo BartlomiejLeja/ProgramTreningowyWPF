@@ -30,10 +30,10 @@ namespace ProgramTreningowyWPF
             }
         }
 
-        public p SerchForView(DateTime dataToSerch)
+        public Models.p SerchForView(DateTime dataToSerch)
         {
 
-            using (WorkOutEntities contex = new WorkOutEntities())
+            using (Models.WorkOutEntities contex = new Models.WorkOutEntities())
             {
 
                 var pToView = (from c in contex.p where c.Dzień == dataToSerch select c).FirstOrDefault(); //LING to Enitities FirstOrDefault() ponieważ to kolekcja enitis i to 

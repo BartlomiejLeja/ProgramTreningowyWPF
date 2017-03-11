@@ -49,9 +49,9 @@ namespace ProgramTreningowyWPF.ViewModels
         private void Execute()
         {
             
-            p Dzien;
-            Dzien = new p(SelectedDate, Diete, Wage);
-            using (WorkOutEntities contex = new WorkOutEntities())
+            Models.p Dzien;
+            Dzien = new Models.p(SelectedDate, Diete, Wage);
+            using (Models.WorkOutEntities contex = new Models.WorkOutEntities())
             {
                 try
                 {

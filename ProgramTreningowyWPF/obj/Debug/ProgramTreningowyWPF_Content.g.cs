@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("workout.context.tt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("workout.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/workout.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/workout.tt")]
 
 

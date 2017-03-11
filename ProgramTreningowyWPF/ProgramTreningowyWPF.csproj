@@ -104,7 +104,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="p.cs">
+    <Compile Include="Models\p.cs">
       <DependentUpon>WorkOut.tt</DependentUpon>
     </Compile>
     <Compile Include="RelayCommand.cs" />
@@ -115,17 +115,17 @@
     <Compile Include="Views\DzienTreningowy.xaml.cs">
       <DependentUpon>DzienTreningowy.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WorkOut.Context.cs">
+    <Compile Include="Models\WorkOut.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WorkOut.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="WorkOut.cs">
+    <Compile Include="Models\WorkOut.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WorkOut.tt</DependentUpon>
     </Compile>
-    <Compile Include="WorkOut.Designer.cs">
+    <Compile Include="Models\WorkOut.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WorkOut.edmx</DependentUpon>
@@ -186,11 +186,11 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <EntityDeploy Include="WorkOut.edmx">
+    <EntityDeploy Include="Models\WorkOut.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WorkOut.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="WorkOut.edmx.diagram">
+    <None Include="Models\WorkOut.edmx.diagram">
       <DependentUpon>WorkOut.edmx</DependentUpon>
     </None>
   </ItemGroup>
@@ -201,12 +201,12 @@
     <Resource Include="Views\training_3-wallpaper-1920x1080.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="WorkOut.Context.tt">
+    <Content Include="Models\WorkOut.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WorkOut.edmx</DependentUpon>
       <LastGenOutput>WorkOut.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="WorkOut.tt">
+    <Content Include="Models\WorkOut.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WorkOut.edmx</DependentUpon>
       <LastGenOutput>WorkOut.cs</LastGenOutput>
