@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="ProgramTreningowyWPF.Views.Graf"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:cht="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" 
+             xmlns:local="clr-namespace:ProgramTreningowyWPF"
+             xmlns:prism ="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+    <!--    xmlns:prism="http://prismlibrary.com/" trzeba nuget ściągnąc prism.wpf-->
+    <!--  prism:ViewModelLocator.AutoWireViewModel="True" aby się bindingowały Views z Views model i nic więcej nie trzeba robić yupi -->
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="ItemCollectionViewSource"  CollectionViewType="ListCollectionView"/>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel >
+            <Viewbox x:Name="ViewBoxDataGrid" Grid.Column="1" Margin="-50,0,0,0">
+
+                <DataGrid x:Name="dataGrid" DataContext="{DynamicResource ItemCollectionViewSource}"  ItemsSource="{Binding}"  Grid.Column="1" Margin="44,10,0,0" Height="123" Width="701" Opacity="0.7" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalContentAlignment="Stretch">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="100"/>
+                        <DataGridTextColumn Binding="{Binding Dzień}" Header="Dzień" Width="100"/>
+                        <DataGridTextColumn Binding="{Binding Dieta}" Header="Dieta" Width="100"/>
+                        <DataGridTextColumn Binding="{Binding Ćwiczenia}" Header="Ćwiczenia" Width="100" CanUserResize="False" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding Suplementacja}" Header="Suplementacja" Width="100" />
+                        <DataGridTextColumn Binding="{Binding Waga}" Header="Waga" Width="100"/>
+                        <DataGridTemplateColumn Header="Zdjęcie" Width="100" IsReadOnly="True" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Zdjecie}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Viewbox>
+            <cht:Chart x:Name="wagaChart"  Title="Waga" Grid.Column="1" Margin="0,210,38,108" Opacity="0.7">
+                <cht:LineSeries ItemsSource="{Binding}"/>
+            </cht:Chart>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

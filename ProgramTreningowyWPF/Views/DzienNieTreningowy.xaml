@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="ProgramTreningowyWPF.Views.DzienNieTreningowy"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProgramTreningowyWPF"
+             xmlns:prism ="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+    <!--    xmlns:prism="http://prismlibrary.com/" trzeba nuget ściągnąc prism.wpf-->
+    <!--  prism:ViewModelLocator.AutoWireViewModel="True" aby się bindingowały Views z Views model i nic więcej nie trzeba robić yupi -->
+    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"  />
+                <RowDefinition Height="40"  />
+                <RowDefinition Height="40" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="label" Content="Data"  Foreground="#FF6F6F81" FontWeight="Bold" Grid.Column="0" Grid.Row="1" FontSize="10" RenderTransformOrigin="2.842,0.639" Margin="50,0,0,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
+            <Label x:Name="label1" Content="Waga" FontSize="10" FontWeight="Bold" Foreground="#FF6F6F81" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="50,0,0,0" Width="36.6" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
+            <Label x:Name="label2" Content="Opis diety" FontSize="10" FontWeight="Bold" Foreground="#FF6F6F81" Grid.Column="0" Grid.Row="3" Margin="50,0,92.5,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
+
+            <DatePicker  Opacity="0.5" Grid.Column="1" Grid.Row="1"
+                         d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" 
+                         x:Name="DataPickerUserControl" SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Column="1" Grid.Row="2" Opacity="0.5" d:LayoutOverrides="LeftMargin, 
+                     RightMargin, TopMargin, BottomMargin" x:Name="TextBoxWaga" 
+                     Text="{Binding Wage , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <RichTextBox x:Name="richTextBox_Copy"  Opacity="0" Grid.Column="1" Grid.Row="4" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"   >
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+            <RichTextBox x:Name="richTextBox_Cop"  Opacity="0" Grid.Column="1" Grid.Row="5" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"  VerticalAlignment="Top"   >
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+            <RichTextBox x:Name="RichTextBoxDieta"  Opacity="0.5" Grid.Column="1" Grid.Row="3" 
+                         d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" 
+                      >
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text= "{Binding Diete, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+
+            <Button   x:Name="AddDay"  Grid.Column="1" Grid.Row="11" Style="{DynamicResource ApplicationButtonStyle}" Content="Dodaj dzień" 
+                      Command="{Binding AddDay}" ></Button>
+
+        </Grid>
+    </Viewbox>
+</UserControl>

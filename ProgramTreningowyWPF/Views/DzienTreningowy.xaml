@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="ProgramTreningowyWPF.Views.DzienTreningowy"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProgramTreningowyWPF.Views"
+             xmlns:prism ="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+    <UserControl.Resources>
+        <Storyboard x:Key="upAddPhoto">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="AddPhoto">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="AddPhoto">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <!--    xmlns:prism="http://prismlibrary.com/" trzeba nuget ściągnąc prism.wpf-->
+    <!--  prism:ViewModelLocator.AutoWireViewModel="True" aby się bindingowały Views z Views model i nic więcej nie trzeba robić yupi -->
+
+    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid   HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"  />
+                <RowDefinition Height="40"  />
+                <RowDefinition Height="40" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+            <Label x:Name="label" Content="Data"  Foreground="#FF6F6F81" FontWeight="Bold" Grid.Column="0" Grid.Row="1" FontSize="10" RenderTransformOrigin="2.842,0.639" Margin="50,0,0,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
+            <Label x:Name="label1" Content="Waga" FontSize="10" FontWeight="Bold" Foreground="#FF6F6F81" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="50,0,0,0" Width="36.6" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
+            <Label x:Name="label2" Content="Opis diety" FontSize="10" FontWeight="Bold" Foreground="#FF6F6F81" Grid.Column="0" Grid.Row="3" Margin="50,0,92.5,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
+            <Label x:Name="label3" Content="Opis Suplementacji" FontSize="10" FontWeight="Bold" Foreground="#FF6F6F81" Grid.Column="0" Grid.Row="4" Margin="50,0,49.727,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
+            <Label x:Name="label4" Content="Opis Cwiczeń" FontSize="10" FontWeight="Bold" Foreground="#FF6F6F81" Grid.Column="0" Grid.Row="5" Margin="50,1.85,78.107,0" d:LayoutOverrides="LeftMargin, RightMargin" Height="31.31" VerticalAlignment="Top" />
+
+            <DatePicker  Opacity="0.5" Grid.Column="1" Grid.Row="1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" x:Name="DataPickerUserControl"  />
+            <TextBox Grid.Column="1" Grid.Row="2" Opacity="0.5" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" x:Name="TextBoxWaga" />
+            <RichTextBox x:Name="RichTextBoxSuplementacja"  Opacity="0.5" Grid.Column="1" Grid.Row="4" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"   >
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+            <RichTextBox x:Name="RichTextBoxCwiczenia"  Opacity="0.5" Grid.Column="1" Grid.Row="5" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"  VerticalAlignment="Top"   >
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+            <RichTextBox x:Name="RichTextBoxDieta"  Opacity="0.5" Grid.Column="1" Grid.Row="3" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"   >
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+
+            <Button   x:Name="AddDay"  Grid.Column="1" Grid.Row="11" Style="{DynamicResource ApplicationButtonStyle}" Content="Dodaj dzień"  ></Button>
+
+            <Button  x:Name="AddPhoto" Grid.Column="0" Grid.Row="11" Style="{DynamicResource ApplicationButtonStyle}" Content="Dodaj zdjęcie" ></Button>
+
+        </Grid>
+
+    </Viewbox>
+</UserControl>
