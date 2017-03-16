@@ -8,6 +8,7 @@
         xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="ProgramTreningowyWPF.Views.MainWindow"
     xmlns:prism="http://prismlibrary.com/" 
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
     prism:ViewModelLocator.AutoWireViewModel="True"  
         mc:Ignorable="d"
     x:Name="Main"
@@ -80,27 +81,30 @@
             <ColumnDefinition Width="200*"/>
             <ColumnDefinition x:Name="Druga" Width="394*"/>
         </Grid.ColumnDefinitions>
-        <Viewbox x:Name="ViewBoxCalendar" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-5,44,0,0">
+       
+        <DatePicker  SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="Hidden">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedDateChanged">
+                    <i:InvokeCommandAction Command="{Binding NavigatedCommand}" CommandParameter="Graf"  />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DatePicker>
+        <Viewbox VerticalAlignment="Top">
             <Calendar x:Name="MainCalendar"  SelectionMode="SingleDate" 
                       HorizontalAlignment="Left" VerticalAlignment="Top" Width="334.342"
                         
                       SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectedDateChanged">
-                        <prism:InvokeCommandAction Command="{Binding NavigatedCommand}" CommandParameter="DzienNieTreningowy"  />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <Calendar.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFE4EAF0" Offset="0"/>
-                        <GradientStop Color="#FFECF0F4" Offset="0.16"/>
-                        <GradientStop Color="#FFFCFCFD" Offset="0.16"/>
-                        <GradientStop Color="#FF1B1A1A" Offset="1"/>
-                    </LinearGradientBrush>
-                </Calendar.Background>
-            </Calendar>
+         
+            <Calendar.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE4EAF0" Offset="0"/>
+                    <GradientStop Color="#FFECF0F4" Offset="0.16"/>
+                    <GradientStop Color="#FFFCFCFD" Offset="0.16"/>
+                    <GradientStop Color="#FF1B1A1A" Offset="1"/>
+                </LinearGradientBrush>
+            </Calendar.Background>
+        </Calendar>
         </Viewbox>
-
         <Button x:Name="buttonTrening" Grid.Column="0" Content="Dodaj dzień treningowy"
                 Height="65.5" Margin="40,0,35.33,94.047"
                 Style="{DynamicResource ApplicationButtonStyle}" VerticalAlignment="Bottom"
@@ -117,7 +121,7 @@
         <Button  x:Name="buttonNieTrening" Grid.Column="0" Content="Dodaj dzień nietreningowy"
                  Height="67" Margin="40,0,35.33,164.547" Style="{DynamicResource ApplicationButtonStyle}"
                  VerticalAlignment="Bottom" Foreground="#FF0E0000" FontWeight="Bold" FontSize="14"  
-                 RenderTransformOrigin="0.5,0.5"  Command="{Binding NavigatedCommand}" CommandParameter="DzienNieTreningowy" >
+                 RenderTransformOrigin="0.5,0.5"  Command="{Binding NavigatedCommand}" CommandParameter="DzienNieTreningowy"  >
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

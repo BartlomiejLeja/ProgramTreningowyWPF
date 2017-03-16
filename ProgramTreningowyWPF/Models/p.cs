@@ -21,6 +21,10 @@ namespace ProgramTreningowyWPF.Models
             Waga = wage;
 
         }
+        public p()
+        {
+
+        }
         public int Id { get; set; }
         public Nullable<System.DateTime> Dzień { get; set; }
         public string Dieta { get; set; }

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
               xmlns:cht="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" 
-             xmlns:local="clr-namespace:ProgramTreningowyWPF"
+             xmlns:local="clr-namespace:ProgramTreningowyWPF.Views"
              xmlns:prism ="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
@@ -18,7 +18,7 @@
         <StackPanel >
             <Viewbox x:Name="ViewBoxDataGrid" Grid.Column="1" Margin="-50,0,0,0">
 
-                <DataGrid x:Name="dataGrid" DataContext="{DynamicResource ItemCollectionViewSource}"  ItemsSource="{Binding}"  Grid.Column="1" Margin="44,10,0,0" Height="123" Width="701" Opacity="0.7" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalContentAlignment="Stretch">
+                <DataGrid x:Name="dataGrid"   ItemsSource="{Binding Path=Values}"  Grid.Column="1" Margin="44,10,0,0" Height="123" Width="701" Opacity="0.7" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalContentAlignment="Stretch">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="100"/>
                         <DataGridTextColumn Binding="{Binding Dzień}" Header="Dzień" Width="100"/>

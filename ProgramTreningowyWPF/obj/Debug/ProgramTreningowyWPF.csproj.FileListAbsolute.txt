@@ -116,3 +116,14 @@ C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTr
 C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\obj\Debug\ProgramTreningowyWPF.g.resources
 C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\obj\Debug\ProgramTreningowyWPF.Properties.Resources.resources
 C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\obj\Debug\ProgramTreningowyWPF.csproj.GenerateResource.Cache
+C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll

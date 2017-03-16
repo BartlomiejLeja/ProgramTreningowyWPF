@@ -29,7 +29,7 @@ namespace ProgramTreningowyWPF
            
             Container.RegisterTypeForNavigation<DzienNieTreningowy>("DzienNieTreningowy");//rejestrujemy View DzienNieTreningowy
             Container.RegisterTypeForNavigation<DzienTreningowy>("DzienTreningowy");//rejestrujemy View DzienTreningowy
-        
+            Container.RegisterTypeForNavigation<Graf>("Graf");//rejestrujemy View Graf
         }
     }
 

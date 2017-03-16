@@ -54,20 +54,20 @@ namespace ProgramTreningowyWPF.Views
 
       
 
-        //private void MainCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
-        //{
+        private void MainCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
           
-        //    ListTab.Clear();
+      // ListTab.Clear();
         
-        //    DateTime r = MainCalendar.SelectedDate.Value;
+      //DateTime r = MainCalendar.SelectedDate.Value;
             
-        //    //ShowDay = Z.SerchForView(Z.SelectedDate);
-        //    //ListTab.Add(ShowDay);
-        //    //CollectionViewSource itemCollectionViewSource;
-        //    //itemCollectionViewSource = (CollectionViewSource)(FindResource("ItemCollectionViewSource"));
-        //    //itemCollectionViewSource.Source = ListTab;
-        //    //dataGrid.Items.Refresh();
+      //  ShowDay = Z.SerchForView(Z.SelectedDate);
+      // ListTab.Add(ShowDay);
+      //  CollectionViewSource itemCollectionViewSource;
+      //  itemCollectionViewSource = (CollectionViewSource)(FindResource("ItemCollectionViewSource"));
+      //    itemCollectionViewSource.Source = ListTab;
+      //     dataGrid.Items.Refresh();
 
-        //}
+        }
     }
 }
