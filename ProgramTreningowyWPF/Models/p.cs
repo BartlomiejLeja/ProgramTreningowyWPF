@@ -14,12 +14,14 @@ namespace ProgramTreningowyWPF.Models
     
     public partial class p
     {
-        public p(DateTime? Date, string diete, double? wage)
+        public p(DateTime? Date, string diete, double? wage,string suplementation="",string workOut="", byte[] photo = null)
         {
             Dzień = Date;
             Dieta = diete;
             Waga = wage;
-
+            Suplementacja = suplementation;
+            Ćwiczenia = workOut;
+            Zdjecie = photo;
         }
         public p()
         {

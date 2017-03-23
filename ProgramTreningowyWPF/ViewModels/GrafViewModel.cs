@@ -15,46 +15,34 @@ namespace ProgramTreningowyWPF.ViewModels
     public class GrafViewModel : BindableBase
     {
        
-        private DateTime _selectedDate;
-        public DateTime SelectedDate
-        {
-            get { return _selectedDate; }
+      
 
-            set { SetProperty(ref _selectedDate, value); }
+        private p _selectedDay; //włóaściwość prismowa
+        public p SelectedDay
+        {
+            get { return _selectedDay; }
+
+            set { SetProperty(ref _selectedDay, value); }
 
         }
-
-        public GrafViewModel(IEventAggregator eventAggregator)
+        public GrafViewModel(IEventAggregator eventAggregator, IEventAggregator eventAggregator1)
         {
-            eventAggregator.GetEvent<DateEvent>().Subscribe(UpdateDate); //przyjmujemy wartośc wyslaną przez eventaggregatro
-            Values = new ObservableCollection<p>();
-            Values.Add(SerchForView(SelectedDate));
+            eventAggregator1.GetEvent<DayEvent>().Subscribe(UpdateDay); //przyjmujemy wartośc wyslaną przez eventaggregatro
+            
+          
         }
 
-        private void UpdateDate(DateTime? obj)
+        private void UpdateDay(p obj)//super metodka która trigeruje się za każdym razem jak jest zmiana na dacie
         {
-            SelectedDate = (DateTime)obj;
-        }
-
-        public Models.p SerchForView(DateTime dataToSerch)
-        {
-
-            using (Models.WorkOutEntities contex = new Models.WorkOutEntities())
-            {
-
-               // var pToView = (from c in contex.p where c.Dzień == dataToSerch select c).FirstOrDefault(); //LING to Enitities FirstOrDefault() ponieważ to kolekcja enitis i to 
-                var pToView = (from c in contex.p select c).FirstOrDefault();
-                MessageBox.Show(pToView.Dieta);
-                return pToView;
-                //FirstOrDefault() ponieważ to kolekcja enitis ta metoda zamienia mi ti na moją klase
-           
-            }
+            SelectedDay = (p)obj;
+            Values = new ObservableCollection<p>();//wreszcie sukces ;)
+            Values.Add(SelectedDay);
 
         }
 
 
-        private ObservableCollection<p> values;
-
+        private ObservableCollection<p> values; //lista w której przechowywane sa obiekty przekazane w maina i jest połączona z dataGrid 
+                                               
         public ObservableCollection<p> Values
         {
             get { return values; }

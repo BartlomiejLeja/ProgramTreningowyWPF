@@ -46,33 +46,34 @@
             <Label x:Name="label3" Content="Opis Suplementacji" FontSize="10" FontWeight="Bold" Foreground="#FF6F6F81" Grid.Column="0" Grid.Row="4" Margin="50,0,49.727,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
             <Label x:Name="label4" Content="Opis Cwiczeń" FontSize="10" FontWeight="Bold" Foreground="#FF6F6F81" Grid.Column="0" Grid.Row="5" Margin="50,1.85,78.107,0" d:LayoutOverrides="LeftMargin, RightMargin" Height="31.31" VerticalAlignment="Top" />
 
-            <DatePicker  Opacity="0.5" Grid.Column="1" Grid.Row="1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" x:Name="DataPickerUserControl"  />
-            <TextBox Grid.Column="1" Grid.Row="2" Opacity="0.5" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" x:Name="TextBoxWaga" />
+            <DatePicker  Opacity="0.5" Grid.Column="1" Grid.Row="1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" x:Name="DataPickerUserControl" 
+                         SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Opacity="0.5" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"  Text="{Binding Wage , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="TextBoxWaga" />
             <RichTextBox x:Name="RichTextBoxSuplementacja"  Opacity="0.5" Grid.Column="1" Grid.Row="4" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"   >
                 <FlowDocument>
                     <Paragraph>
-                        <Run Text=""/>
+                        <Run Text= "{Binding Suplementation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
             <RichTextBox x:Name="RichTextBoxCwiczenia"  Opacity="0.5" Grid.Column="1" Grid.Row="5" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"  VerticalAlignment="Top"   >
                 <FlowDocument>
                     <Paragraph>
-                        <Run Text=""/>
+                        <Run Text= "{Binding WorkOut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
             <RichTextBox x:Name="RichTextBoxDieta"  Opacity="0.5" Grid.Column="1" Grid.Row="3" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"   >
                 <FlowDocument>
                     <Paragraph>
-                        <Run Text=""/>
+                        <Run Text= "{Binding Diete, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
 
-            <Button   x:Name="AddDay"  Grid.Column="1" Grid.Row="11" Style="{DynamicResource ApplicationButtonStyle}" Content="Dodaj dzień"  ></Button>
+            <Button   x:Name="AddDay"  Grid.Column="1" Grid.Row="11" Style="{DynamicResource ApplicationButtonStyle}" Content="Dodaj dzień"  Command="{Binding AddDay}" ></Button>
 
-            <Button  x:Name="AddPhoto" Grid.Column="0" Grid.Row="11" Style="{DynamicResource ApplicationButtonStyle}" Content="Dodaj zdjęcie" ></Button>
+            <Button  x:Name="AddPhoto" Grid.Column="0" Grid.Row="11" Style="{DynamicResource ApplicationButtonStyle}" Content="Dodaj zdjęcie" Command="{Binding AddPhoto}" ></Button>
 
         </Grid>
 

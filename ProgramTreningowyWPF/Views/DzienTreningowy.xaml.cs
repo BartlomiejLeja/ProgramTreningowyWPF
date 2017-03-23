@@ -24,5 +24,7 @@ namespace ProgramTreningowyWPF.Views
         {
             InitializeComponent();
         }
+
+      
     }
 }

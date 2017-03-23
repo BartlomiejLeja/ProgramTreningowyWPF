@@ -7,11 +7,13 @@ using Prism.Mvvm;
 using Prism.Commands;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Forms;
 
 namespace ProgramTreningowyWPF.ViewModels
 {
     class DzienNieTreningowyViewModel:BindableBase
     {
+      
 
         private DateTime? selectedDate ;
 
@@ -36,10 +38,16 @@ namespace ProgramTreningowyWPF.ViewModels
         }
 
         public DelegateCommand AddDay { get; set; }
+       
+
         public DzienNieTreningowyViewModel()
         {
             AddDay = new DelegateCommand(Execute,CanExecute).ObservesProperty(()=>Diete); //żeby obserowawło zmiany oczywiscie za sprawa prisma
+           
         }
+
+      
+       
 
         private bool CanExecute()
         {
@@ -56,12 +64,11 @@ namespace ProgramTreningowyWPF.ViewModels
                 try
                 {
                     contex.p.Add(Dzien);
-
-                    contex.SaveChanges();
+                     contex.SaveChanges();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.InnerException.Message);
+                    System.Windows.Forms.MessageBox.Show(ex.InnerException.Message);
                 }
             }
         }

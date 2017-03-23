@@ -105,7 +105,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Events\DateEvent.cs" />
+    <Compile Include="Events\DayEvent.cs" />
     <Compile Include="Models\p.cs">
       <DependentUpon>WorkOut.tt</DependentUpon>
     </Compile>

@@ -12,21 +12,27 @@
     <!--    xmlns:prism="http://prismlibrary.com/" trzeba nuget ściągnąc prism.wpf-->
     <!--  prism:ViewModelLocator.AutoWireViewModel="True" aby się bindingowały Views z Views model i nic więcej nie trzeba robić yupi -->
     <UserControl.Resources>
-        <CollectionViewSource x:Key="ItemCollectionViewSource"  CollectionViewType="ListCollectionView"/>
+      
+        <Style x:Key="NameCellStyle" TargetType="DataGridCell">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
     </UserControl.Resources>
     <Grid>
         <StackPanel >
             <Viewbox x:Name="ViewBoxDataGrid" Grid.Column="1" Margin="-50,0,0,0">
 
-                <DataGrid x:Name="dataGrid"   ItemsSource="{Binding Path=Values}"  Grid.Column="1" Margin="44,10,0,0" Height="123" Width="701" Opacity="0.7" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalContentAlignment="Stretch">
+                <DataGrid x:Name="dataGrid"   ItemsSource="{Binding Path=Values}"  Grid.Column="1" Margin="44,10,0,0" Height="150" Width="650" 
+                          Opacity="0.7" AutoGenerateColumns="False" VerticalAlignment="Top" 
+                          HorizontalContentAlignment="Stretch" BorderThickness="1" SelectionMode="Single" RowHeight="122"   
+                          ScrollViewer.CanContentScroll="False"  ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="100"/>
-                        <DataGridTextColumn Binding="{Binding Dzień}" Header="Dzień" Width="100"/>
-                        <DataGridTextColumn Binding="{Binding Dieta}" Header="Dieta" Width="100"/>
-                        <DataGridTextColumn Binding="{Binding Ćwiczenia}" Header="Ćwiczenia" Width="100" CanUserResize="False" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding Suplementacja}" Header="Suplementacja" Width="100" />
-                        <DataGridTextColumn Binding="{Binding Waga}" Header="Waga" Width="100"/>
-                        <DataGridTemplateColumn Header="Zdjęcie" Width="100" IsReadOnly="True" >
+                        <DataGridTextColumn Binding="{Binding Dzień}"  Header="Dzień" Width="62"  CanUserResize="False"/>
+                        <DataGridTextColumn Binding="{Binding Dieta}"  Header="Dieta" Width="130" CanUserResize="False"/>
+                        <DataGridTextColumn Binding="{Binding Ćwiczenia}"  Header="Ćwiczenia" Width="126" CanUserResize="False" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding Suplementacja}"  Header="Suplementacja" Width="120" CanUserResize="False"/>
+                        <DataGridTextColumn Binding="{Binding Waga}"  Header="Waga" Width="50" CanUserResize="False"/>
+                        <DataGridTemplateColumn Header="Zdjęcie" Width="150" IsReadOnly="True" CanUserResize="False">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Image Source="{Binding Zdjecie}"/>
