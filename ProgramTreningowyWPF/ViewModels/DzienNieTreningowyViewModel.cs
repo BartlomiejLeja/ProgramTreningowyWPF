@@ -6,14 +6,35 @@ using System.Threading.Tasks;
 using Prism.Mvvm;
 using Prism.Commands;
 using System.Windows.Input;
-using System.Windows;
+
 using System.Windows.Forms;
+using ProgramTreningowyWPF.Models;
+using Prism.Events;
+using ProgramTreningowyWPF.Events;
 
 namespace ProgramTreningowyWPF.ViewModels
 {
     class DzienNieTreningowyViewModel:BindableBase
     {
+
+        //proba
+        private PersonSet _selectedPerson; //włóaściwość prismowa
+        public PersonSet SelectedPerson
+        {
+            get { return _selectedPerson; }
+
+            set { SetProperty(ref _selectedPerson, value); }
+
+        }
+
+        private void UpdateDay(PersonSet obj)//super metodka która trigeruje się za każdym razem jak jest zmiana na dacie
+        {
+            SelectedPerson = (PersonSet)obj;
+            
+
+        }
       
+        //proba
 
         private DateTime? selectedDate ;
 
@@ -38,16 +59,16 @@ namespace ProgramTreningowyWPF.ViewModels
         }
 
         public DelegateCommand AddDay { get; set; }
-       
 
-        public DzienNieTreningowyViewModel()
+        private IEventAggregator _eventAggregator;
+        public DzienNieTreningowyViewModel(IEventAggregator eventAggregator)
         {
-            AddDay = new DelegateCommand(Execute,CanExecute).ObservesProperty(()=>Diete); //żeby obserowawło zmiany oczywiscie za sprawa prisma
-           
-        }
+            _eventAggregator = eventAggregator;
 
-      
-       
+           AddDay = new DelegateCommand(Execute,CanExecute).ObservesProperty(()=>Diete); //żeby obserowawło zmiany oczywiscie za sprawa prisma
+            eventAggregator.GetEvent<PersonEvent>().Subscribe(UpdateDay);
+          
+        }
 
         private bool CanExecute()
         {
@@ -56,15 +77,17 @@ namespace ProgramTreningowyWPF.ViewModels
 
         private void Execute()
         {
-            
-            Models.p Dzien;
-            Dzien = new Models.p(SelectedDate, Diete, Wage);
-            using (Models.WorkOutEntities contex = new Models.WorkOutEntities())
+          
+            Models.PersonNoTreningDaySet Dzien;
+            Dzien = new Models.PersonNoTreningDaySet(SelectedDate, Diete,SelectedPerson.Id, Wage);
+            using (Models.WorkOut2Container contex = new Models.WorkOut2Container())
             {
                 try
                 {
-                    contex.p.Add(Dzien);
+                    contex.PersonNoTreningDaySetSet.Add(Dzien);
                      contex.SaveChanges();
+                    //MessageBox.Show("Rest day was added! ");
+                    _eventAggregator.GetEvent<WrongLoginString>().Publish("Rest day was added! ");
                 }
                 catch (Exception ex)
                 {

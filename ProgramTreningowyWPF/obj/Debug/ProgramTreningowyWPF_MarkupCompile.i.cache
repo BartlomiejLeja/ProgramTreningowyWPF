@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\Views\App.xaml
-4-214997231
-2-308910419
-23-1701196198
+71968402548
+3-1075187100
+341033151336
 831467395286
-Views\DzienNieTreningowy.xaml;Views\DzienTreningowy.xaml;Views\Graf.xaml;Views\MainWindow.xaml;
+Views\DzienNieTreningowy.xaml;Views\DzienTreningowy.xaml;Views\Graf.xaml;Views\GrafWorkOutDay.xaml;Views\Login.xaml;Views\MainWindow.xaml;Views\Registeration.xaml;
 
-False
+True
 

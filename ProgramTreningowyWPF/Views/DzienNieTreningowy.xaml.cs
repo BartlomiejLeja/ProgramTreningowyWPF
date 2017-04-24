@@ -21,34 +21,12 @@ namespace ProgramTreningowyWPF.Views
     
     public partial class DzienNieTreningowy : UserControl
     {
-       Zarzadca Z = new Zarzadca();
-        private static DzienNieTreningowy instance;
-        public static DzienNieTreningowy Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new DzienNieTreningowy();
-
-                }
-                return instance;
-            }
-        }
+       
         public DzienNieTreningowy()
         {
             InitializeComponent();
         }
 
-        private void AddPhoto_Click(object sender, RoutedEventArgs e)
-        {
-            string myDietaText = new TextRange(RichTextBoxDieta.Document.ContentStart, RichTextBoxDieta.Document.ContentEnd).Text; // aby dostać stringa z richtexboxa
-            string myWaga = TextBoxWaga.Text; //żeby dostac czystą wartość stringa
-           double numer;
-            Double.TryParse(myWaga, out numer);
-            DateTime myData=  DataPickerUserControl.SelectedDate.Value.Date;
-            //Z.AddRecord( myData,myDietaText,numer) ;
-           
-        }
+      
     }
 }

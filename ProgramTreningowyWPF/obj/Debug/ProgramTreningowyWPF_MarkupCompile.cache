@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\obj\Debug\
+E:\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\obj\Debug\
 ProgramTreningowyWPF
 none
 false
 DEBUG;TRACE
-C:\Users\Bartek\Desktop\Git\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\Views\App.xaml
-4-214997231
-2-308910419
-191470459280
-831467395286
-Views\DzienNieTreningowy.xaml;Views\DzienTreningowy.xaml;Views\Graf.xaml;Views\MainWindow.xaml;
+E:\ProgramTreningowyMVVM\ProgramTreningowyWPF\ProgramTreningowyWPF\Views\App.xaml
+71968402548
+3-1075187100
+30-90160482
+831956226312
+Views\DzienNieTreningowy.xaml;Views\DzienTreningowy.xaml;Views\Graf.xaml;Views\GrafWorkOutDay.xaml;Views\Login.xaml;Views\MainWindow.xaml;Views\Registeration.xaml;
 
 False
 

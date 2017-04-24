@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WorkOut2.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="WorkOut2StoreContainer">
+    <EntitySet Name="PersonSetSet" EntityType="WorkOut2.Store.PersonSetSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonTreningDaySetSet" EntityType="WorkOut2.Store.PersonTreningDaySetSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonPhotoSetSet" EntityType="WorkOut2.Store.PersonPhotoSetSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonNoTreningDaySetSet" EntityType="WorkOut2.Store.PersonNoTreningDaySetSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PersonSetPersonNoTreningDaySet" Association="WorkOut2.Store.PersonSetPersonNoTreningDaySet">
+      <End Role="PersonSet" EntitySet="PersonSetSet" />
+      <End Role="PersonNoTreningDaySet" EntitySet="PersonNoTreningDaySetSet" />
+    </AssociationSet>
+    <AssociationSet Name="PersonSetPersonTreningDaySet" Association="WorkOut2.Store.PersonSetPersonTreningDaySet">
+      <End Role="PersonSet" EntitySet="PersonSetSet" />
+      <End Role="PersonTreningDaySet" EntitySet="PersonTreningDaySetSet" />
+    </AssociationSet>
+    <AssociationSet Name="PersonTreningDaySetPersonPhotoSet" Association="WorkOut2.Store.PersonTreningDaySetPersonPhotoSet">
+      <End Role="PersonTreningDaySet" EntitySet="PersonTreningDaySetSet" />
+      <End Role="PersonPhotoSet" EntitySet="PersonPhotoSetSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="PersonSetSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonTreningDaySetSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="true" />
+    <Property Name="Weight" Type="float" Nullable="true" />
+    <Property Name="Exercises" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Diet" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Supplementation" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PersonSetId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonPhotoSetSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Photo" Type="varbinary(max)" Nullable="true" />
+    <Property Name="PersonTreningDaySetId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonNoTreningDaySetSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="true" />
+    <Property Name="Weight" Type="float" Nullable="true" />
+    <Property Name="Diet" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PersonSetId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="PersonSetPersonNoTreningDaySet">
+    <End Role="PersonSet" Type="WorkOut2.Store.PersonSetSet" Multiplicity="1" />
+    <End Role="PersonNoTreningDaySet" Type="WorkOut2.Store.PersonNoTreningDaySetSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonNoTreningDaySet">
+        <PropertyRef Name="PersonSetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonSetPersonTreningDaySet">
+    <End Role="PersonSet" Type="WorkOut2.Store.PersonSetSet" Multiplicity="1" />
+    <End Role="PersonTreningDaySet" Type="WorkOut2.Store.PersonTreningDaySetSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonTreningDaySet">
+        <PropertyRef Name="PersonSetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonTreningDaySetPersonPhotoSet">
+    <End Role="PersonTreningDaySet" Type="WorkOut2.Store.PersonTreningDaySetSet" Multiplicity="1" />
+    <End Role="PersonPhotoSet" Type="WorkOut2.Store.PersonPhotoSetSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonTreningDaySet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonPhotoSet">
+        <PropertyRef Name="PersonTreningDaySetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

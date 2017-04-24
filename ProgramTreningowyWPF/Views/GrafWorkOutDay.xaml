@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="ProgramTreningowyWPF.Views.GrafWorkOutDay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:cht="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" 
+             xmlns:local="clr-namespace:ProgramTreningowyWPF.Views"
+             xmlns:prism ="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+    <!--    xmlns:prism="http://prismlibrary.com/" trzeba nuget ściągnąc prism.wpf-->
+    <!--  prism:ViewModelLocator.AutoWireViewModel="True" aby się bindingowały Views z Views model i nic więcej nie trzeba robić yupi -->
+    <UserControl.Resources>
+
+        <Style x:Key="NameCellStyle" TargetType="DataGridCell">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel >
+
+
+
+            <Viewbox x:Name="ViewBoxDataGrid" Grid.Column="1" Margin="-50,0,0,0">
+
+                <DataGrid x:Name="dataGrid"   ItemsSource="{Binding Values}"  Grid.Column="1" Margin="44,10,0,0" Height="150" Width="650" 
+                          Opacity="0.7" AutoGenerateColumns="False" VerticalAlignment="Top" 
+                          HorizontalContentAlignment="Stretch" BorderThickness="1" SelectionMode="Single" RowHeight="122"   
+                          ScrollViewer.CanContentScroll="False"  ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Date}"  Header="Dzień" Width="62"  CanUserResize="False"/>
+                        <DataGridTextColumn Binding="{Binding Diet}"  Header="Dieta" Width="130" CanUserResize="False"/>
+                        <DataGridTextColumn Binding="{Binding Exercises}"  Header="Ćwiczenia" Width="126" CanUserResize="False" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding Supplementation}"  Header="Suplementacja" Width="120" CanUserResize="False"/>
+                        <DataGridTextColumn Binding="{Binding Weight}"  Header="Waga" Width="50" CanUserResize="False"/>
+                        <DataGridTemplateColumn Header="Zdjęcie" Width="150" IsReadOnly="True" CanUserResize="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Image}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Viewbox>
+            <Button x:Name="button" Content="Next image" Command="{Binding  ChangeImage}"/>
+            <cht:Chart x:Name="wagaChart"  Title="Progres masy" Grid.Column="1"  Margin="0,210,10,108" Opacity="1" Height="329" Background="#FFD3D1D1" >
+                <cht:BarSeries ItemsSource="{Binding GrafData}" DependentValueBinding="{Binding Path=Value}" IndependentValueBinding="{Binding Path=Key}" Margin="0,0,1,34" FontSize="14" FontWeight="Bold" >
+                    <cht:BarSeries.Background>
+                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                            <GradientStop Color="#FFB9D6F7"/>
+                            <GradientStop Color="#FF718EAC" Offset="1"/>
+                        </RadialGradientBrush>
+                    </cht:BarSeries.Background>
+                </cht:BarSeries>
+            </cht:Chart>
+
+
+
+        </StackPanel>
+    </Grid>
+</UserControl>

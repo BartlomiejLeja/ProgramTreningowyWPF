@@ -17,38 +17,85 @@ namespace ProgramTreningowyWPF.ViewModels
        
       
 
-        private p _selectedDay; //włóaściwość prismowa
-        public p SelectedDay
+        private PersonNoTreningDaySet _selectedDay; //włóaściwość prismowa
+        public PersonNoTreningDaySet SelectedDay
         {
             get { return _selectedDay; }
 
             set { SetProperty(ref _selectedDay, value); }
 
         }
-        public GrafViewModel(IEventAggregator eventAggregator, IEventAggregator eventAggregator1)
+
+        private PersonSet _selectedPerson; //włóaściwość prismowa
+        public PersonSet SelectedPerson
         {
-            eventAggregator1.GetEvent<DayEvent>().Subscribe(UpdateDay); //przyjmujemy wartośc wyslaną przez eventaggregatro
-            
-          
+            get { return _selectedPerson; }
+
+            set { SetProperty(ref _selectedPerson, value); }
+
         }
 
-        private void UpdateDay(p obj)//super metodka która trigeruje się za każdym razem jak jest zmiana na dacie
+        public GrafViewModel( IEventAggregator eventAggregator)
         {
-            SelectedDay = (p)obj;
-            Values = new ObservableCollection<p>();//wreszcie sukces ;)
+
+            eventAggregator.GetEvent<DayEvent>().Subscribe(UpdateDay); //przyjmujemy wartośc wyslaną przez eventaggregatro
+            eventAggregator.GetEvent<PersonEvent>().Subscribe((obj) => SelectedPerson = (PersonSet)obj);
+            GrafData = new ObservableCollection<KeyValuePair<string, double?>>();
+        }
+
+        private void UpdateDay(PersonNoTreningDaySet obj)//super metodka która trigeruje się za każdym razem jak jest zmiana na dacie
+        {
+
+            SelectedDay = (PersonNoTreningDaySet)obj;
+            Values = new ObservableCollection<PersonNoTreningDaySet>();//wreszcie sukces ;)
             Values.Add(SelectedDay);
+           
+
+            using (Models.WorkOut2Container contex = new Models.WorkOut2Container())
+            {
+                var listForGraf = (from c in contex.PersonNoTreningDaySetSet where c.PersonSetId == SelectedPerson.Id select c);
+                var listForGraf1 = (from c in contex.PersonTreningDaySetSet where c.PersonSetId == SelectedPerson.Id select c);
+                Dictionary<string, double?> dictionary =  new Dictionary<string, double?>();
+
+                foreach (var graf in listForGraf)
+                {
+                    DateTime temp = (DateTime)graf.Date;
+                    dictionary.Add(temp.ToShortDateString(), graf.Weight);
+                }
+                foreach (var graf in listForGraf1)
+                {
+                    DateTime temp = (DateTime)graf.Date;
+                    dictionary.Add(temp.ToShortDateString(), graf.Weight);
+                }
+
+                var items = from pair in dictionary orderby pair.Key ascending select pair;
+                foreach (var graf in items)
+                {
+                    GrafData.Add(new KeyValuePair<string, double?>(graf.Key, graf.Value));
+                }
+            
+            }
 
         }
 
 
-        private ObservableCollection<p> values; //lista w której przechowywane sa obiekty przekazane w maina i jest połączona z dataGrid 
+        private ObservableCollection<PersonNoTreningDaySet> values; //lista w której przechowywane sa obiekty przekazane w maina i jest połączona z dataGrid 
                                                
-        public ObservableCollection<p> Values
+        public ObservableCollection<PersonNoTreningDaySet> Values
         {
             get { return values; }
             set { SetProperty(ref values, value); }
+           
+        }
+        
+        private ObservableCollection<KeyValuePair<string, double?>> grafData;
+   public ObservableCollection<KeyValuePair<string, double?>> GrafData
+        {
+            get { return grafData; }
+            set { SetProperty(ref grafData, value); }
         }
 
+      
 
 
     }

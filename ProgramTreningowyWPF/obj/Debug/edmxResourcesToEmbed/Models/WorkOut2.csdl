@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="WorkOut2" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="WorkOut2Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="PersonSetSet" EntityType="WorkOut2.PersonSet" />
+    <EntitySet Name="PersonTreningDaySetSet" EntityType="WorkOut2.PersonTreningDaySet" />
+    <EntitySet Name="PersonPhotoSetSet" EntityType="WorkOut2.PersonPhotoSet" />
+    <EntitySet Name="PersonNoTreningDaySetSet" EntityType="WorkOut2.PersonNoTreningDaySet" />
+    <AssociationSet Name="PersonSetPersonNoTreningDaySet" Association="WorkOut2.PersonSetPersonNoTreningDaySet">
+      <End Role="PersonSet" EntitySet="PersonSetSet" />
+      <End Role="PersonNoTreningDaySet" EntitySet="PersonNoTreningDaySetSet" />
+    </AssociationSet>
+    <AssociationSet Name="PersonSetPersonTreningDaySet" Association="WorkOut2.PersonSetPersonTreningDaySet">
+      <End Role="PersonSet" EntitySet="PersonSetSet" />
+      <End Role="PersonTreningDaySet" EntitySet="PersonTreningDaySetSet" />
+    </AssociationSet>
+    <AssociationSet Name="PersonTreningDaySetPersonPhotoSet" Association="WorkOut2.PersonTreningDaySetPersonPhotoSet">
+      <End Role="PersonTreningDaySet" EntitySet="PersonTreningDaySetSet" />
+      <End Role="PersonPhotoSet" EntitySet="PersonPhotoSetSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="PersonSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" />
+    <NavigationProperty Name="PersonNoTreningDaySet" Relationship="WorkOut2.PersonSetPersonNoTreningDaySet" FromRole="PersonSet" ToRole="PersonNoTreningDaySet" />
+    <NavigationProperty Name="PersonTreningDaySet" Relationship="WorkOut2.PersonSetPersonTreningDaySet" FromRole="PersonSet" ToRole="PersonTreningDaySet" />
+  </EntityType>
+  <EntityType Name="PersonTreningDaySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="true" />
+    <Property Name="Weight" Type="Double" Nullable="true" />
+    <Property Name="Exercises" Type="String" Nullable="true" />
+    <Property Name="Diet" Type="String" Nullable="true" />
+    <Property Name="Supplementation" Type="String" Nullable="true" />
+    <NavigationProperty Name="PersonSet" Relationship="WorkOut2.PersonSetPersonTreningDaySet" FromRole="PersonTreningDaySet" ToRole="PersonSet" />
+    <Property Name="PersonSetId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PersonPhotoSet" Relationship="WorkOut2.PersonTreningDaySetPersonPhotoSet" FromRole="PersonTreningDaySet" ToRole="PersonPhotoSet" />
+  </EntityType>
+  <EntityType Name="PersonPhotoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Photo" Type="Binary" Nullable="true" />
+    <NavigationProperty Name="PersonTreningDaySet" Relationship="WorkOut2.PersonTreningDaySetPersonPhotoSet" FromRole="PersonPhotoSet" ToRole="PersonTreningDaySet" />
+    <Property Name="PersonTreningDaySetId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonNoTreningDaySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="true" />
+    <Property Name="Weight" Type="Double" Nullable="true" />
+    <Property Name="Diet" Type="String" Nullable="true" />
+    <NavigationProperty Name="PersonSet" Relationship="WorkOut2.PersonSetPersonNoTreningDaySet" FromRole="PersonNoTreningDaySet" ToRole="PersonSet" />
+    <Property Name="PersonSetId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="PersonSetPersonNoTreningDaySet">
+    <End Type="WorkOut2.PersonSet" Role="PersonSet" Multiplicity="1" />
+    <End Type="WorkOut2.PersonNoTreningDaySet" Role="PersonNoTreningDaySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonNoTreningDaySet">
+        <PropertyRef Name="PersonSetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonSetPersonTreningDaySet">
+    <End Type="WorkOut2.PersonSet" Role="PersonSet" Multiplicity="1" />
+    <End Type="WorkOut2.PersonTreningDaySet" Role="PersonTreningDaySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonTreningDaySet">
+        <PropertyRef Name="PersonSetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonTreningDaySetPersonPhotoSet">
+    <End Type="WorkOut2.PersonTreningDaySet" Role="PersonTreningDaySet" Multiplicity="1" />
+    <End Type="WorkOut2.PersonPhotoSet" Role="PersonPhotoSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonTreningDaySet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonPhotoSet">
+        <PropertyRef Name="PersonTreningDaySetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

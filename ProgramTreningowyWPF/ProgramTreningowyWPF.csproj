@@ -13,6 +13,21 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -106,32 +121,55 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Events\DayEvent.cs" />
-    <Compile Include="Models\p.cs">
-      <DependentUpon>WorkOut.tt</DependentUpon>
+    <Compile Include="Events\PersonEvent.cs" />
+    <Compile Include="Models\ExtendedPersonTraninDaySet.cs" />
+    <Compile Include="Models\Models.cs" />
+    <Compile Include="Models\PersonNoTreningDaySet.cs">
+      <DependentUpon>WorkOut2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonPhotoSet.cs">
+      <DependentUpon>WorkOut2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonSet.cs">
+      <DependentUpon>WorkOut2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonTreningDaySet.cs">
+      <DependentUpon>WorkOut2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkOut2.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkOut2.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkOut2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkOut2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkOut2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkOut2.edmx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\DzienNieTreningowyViewModel.cs" />
     <Compile Include="ViewModels\DzienTreningowyViewModel.cs" />
     <Compile Include="ViewModels\GrafViewModel.cs" />
+    <Compile Include="ViewModels\GrafWorkOutDayViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\RegisterationViewModel.cs" />
     <Compile Include="Views\DzienTreningowy.xaml.cs">
       <DependentUpon>DzienTreningowy.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\WorkOut.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WorkOut.Context.tt</DependentUpon>
+    <Compile Include="Views\GrafWorkOutDay.xaml.cs">
+      <DependentUpon>GrafWorkOutDay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\WorkOut.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WorkOut.tt</DependentUpon>
+    <Compile Include="Views\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\WorkOut.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WorkOut.edmx</DependentUpon>
+    <Compile Include="Views\Registeration.xaml.cs">
+      <DependentUpon>Registeration.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Zarzadca.cs" />
     <Page Include="Views\DzienNieTreningowy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -141,6 +179,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Graf.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GrafWorkOutDay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,6 +208,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Registeration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -181,19 +231,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\WorkOut2.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WorkOut2.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\WorkOut2.edmx.diagram">
+      <DependentUpon>WorkOut2.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <EntityDeploy Include="Models\WorkOut.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WorkOut.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Models\WorkOut.edmx.diagram">
-      <DependentUpon>WorkOut.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -202,22 +252,35 @@
     <Resource Include="Views\training_3-wallpaper-1920x1080.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\WorkOut.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WorkOut.edmx</DependentUpon>
-      <LastGenOutput>WorkOut.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\WorkOut.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WorkOut.edmx</DependentUpon>
-      <LastGenOutput>WorkOut.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Image\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\WorkOut2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WorkOut2.Context.cs</LastGenOutput>
+      <DependentUpon>WorkOut2.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\WorkOut2.edmx.sql" />
+    <Content Include="Models\WorkOut2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WorkOut2.cs</LastGenOutput>
+      <DependentUpon>WorkOut2.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

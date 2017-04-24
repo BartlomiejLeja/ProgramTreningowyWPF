@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/workout.context.tt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/workout.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/workout2.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/workout2.edmx.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/workout2.tt")]
 
 

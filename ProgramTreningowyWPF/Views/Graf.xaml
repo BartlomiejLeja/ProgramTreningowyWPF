@@ -27,11 +27,11 @@
                           ScrollViewer.CanContentScroll="False"  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Dzień}"  Header="Dzień" Width="62"  CanUserResize="False"/>
-                        <DataGridTextColumn Binding="{Binding Dieta}"  Header="Dieta" Width="130" CanUserResize="False"/>
+                        <DataGridTextColumn Binding="{Binding Date}"  Header="Dzień" Width="62"  CanUserResize="False"/>
+                        <DataGridTextColumn Binding="{Binding Diet}"  Header="Dieta" Width="130" CanUserResize="False"/>
                         <DataGridTextColumn Binding="{Binding Ćwiczenia}"  Header="Ćwiczenia" Width="126" CanUserResize="False" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding Suplementacja}"  Header="Suplementacja" Width="120" CanUserResize="False"/>
-                        <DataGridTextColumn Binding="{Binding Waga}"  Header="Waga" Width="50" CanUserResize="False"/>
+                        <DataGridTextColumn Binding="{Binding Weight}"  Header="Waga" Width="50" CanUserResize="False"/>
                         <DataGridTemplateColumn Header="Zdjęcie" Width="150" IsReadOnly="True" CanUserResize="False">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -42,8 +42,15 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Viewbox>
-            <cht:Chart x:Name="wagaChart"  Title="Waga" Grid.Column="1" Margin="0,210,38,108" Opacity="0.7">
-                <cht:LineSeries ItemsSource="{Binding}"/>
+            <cht:Chart x:Name="wagaChart"  Title="Progres masy" Grid.Column="1" Margin="0,210,10,108" Opacity="1" Height="329" Background="#FFD3D1D1" >
+                <cht:LineSeries ItemsSource="{Binding Path=GrafData}" DependentValueBinding="{Binding Path=Value}" IndependentValueBinding="{Binding Path=Key}" Margin="0,0,1,3" FontSize="14" FontWeight="Bold" >
+                    <cht:LineSeries.Background>
+                        <RadialGradientBrush Center="0.075,0.015" GradientOrigin="-0.1,-0.1" RadiusY="0.9" RadiusX="1.05">
+                            <GradientStop Color="#FFB9D6F7"/>
+                            <GradientStop Color="#FF718EAC" Offset="1"/>
+                        </RadialGradientBrush>
+                    </cht:LineSeries.Background>
+                </cht:LineSeries>
             </cht:Chart>
 
         </StackPanel>

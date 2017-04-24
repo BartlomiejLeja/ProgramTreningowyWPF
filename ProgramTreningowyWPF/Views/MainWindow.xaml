@@ -9,70 +9,72 @@
     xmlns:prism="http://prismlibrary.com/" 
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:views="clr-namespace:ProgramTreningowyWPF.Views"
+     xmlns:sys="clr-namespace:System;assembly=mscorlib" 
     prism:ViewModelLocator.AutoWireViewModel="True"  
         mc:Ignorable="d"
     x:Name="Main"
-        Title="Trenażer" Height="800" Width="1200" MinHeight="800" MinWidth="1200" ResizeMode="CanResize">
+        Title="WorkOutSaver" Height="800" Width="1200" MinHeight="800" MinWidth="1200" ResizeMode="CanResize">
     <!--    xmlns:prism="http://prismlibrary.com/" trzeba nuget ściągnąc prism.wpf-->
     <!--  prism:ViewModelLocator.AutoWireViewModel="True" aby się bindingowały Views z Views model i nic więcej nie trzeba robić yupi -->
 
 
+
     <Window.Resources>
-        <local:Zarzadca x:Key="zarzadcaViewModel" />
-        <CollectionViewSource x:Key="ItemCollectionViewSource"  CollectionViewType="ListCollectionView"/>
-        <Storyboard x:Key="up">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonTrening">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonTrening">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="down">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonTrening">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1.2"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonTrening">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1.2"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="up1">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonNieTrening">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonNieTrening">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="down1">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonNieTrening">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1.2"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonNieTrening">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1.2"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
+
+        <Style x:Key="ApplicationButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="#FFE6EAEE" Opacity="0.7" Stroke="Black" StrokeThickness="3"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Resources>
+                <Storyboard x:Key="up">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" >
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="down">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" >
+                        <EasingDoubleKeyFrame KeyTime="0" Value="1.2"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="1.2"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </Style.Resources>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="UIElement.MouseEnter" >
+                    <BeginStoryboard x:Name="up_BeginStoryboard" Storyboard="{StaticResource up}"/>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="UIElement.MouseLeave" >
+                    <BeginStoryboard x:Name="down_BeginStoryboard" Storyboard="{StaticResource down}"/>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--<CollectionViewSource x:Key="ItemCollectionViewSource"  CollectionViewType="ListCollectionView"/>-->
 
     </Window.Resources>
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="buttonTrening">
-            <BeginStoryboard x:Name="up_BeginStoryboard" Storyboard="{StaticResource up}"/>
-        </EventTrigger>
-        <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="buttonTrening">
-            <BeginStoryboard x:Name="down_BeginStoryboard" Storyboard="{StaticResource down}"/>
-        </EventTrigger>
-        <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="buttonNieTrening">
-            <BeginStoryboard x:Name="up1_BeginStoryboard" Storyboard="{StaticResource up1}"/>
-        </EventTrigger>
-        <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="buttonNieTrening">
-            <BeginStoryboard x:Name="down1_BeginStoryboard" Storyboard="{StaticResource down1}"/>
-        </EventTrigger>
 
-    </Window.Triggers>
+
     <Grid ShowGridLines="True"  >
         <Grid.Background>
             <ImageBrush ImageSource="training_3-wallpaper-1920x1080.jpg"/>
@@ -81,34 +83,37 @@
             <ColumnDefinition Width="200*"/>
             <ColumnDefinition x:Name="Druga" Width="394*"/>
         </Grid.ColumnDefinitions>
-       
+
         <DatePicker  SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="Hidden">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedDateChanged">
-                    <i:InvokeCommandAction Command="{Binding NavigatedCommand}" CommandParameter="Graf"  />
+                    <i:InvokeCommandAction Command="{Binding NavigateToGraf}"  />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </DatePicker>
-        <Viewbox VerticalAlignment="Top">
-            <Calendar x:Name="MainCalendar"  SelectionMode="SingleDate" 
+        <Label x:Name="LoginLabel" Content="{Binding LoginString}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" FontSize="16" Foreground="White" FontWeight="Bold" Margin="20,2,35,395" />
+        <Viewbox VerticalAlignment="Top" Margin="-5,42,5,0">
+            <Calendar x:Name="MainCalendar"  SelectionMode="MultipleRange" 
                       HorizontalAlignment="Left" VerticalAlignment="Top" Width="334.342"
-                        
-                      SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
          
-            <Calendar.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFE4EAF0" Offset="0"/>
-                    <GradientStop Color="#FFECF0F4" Offset="0.16"/>
-                    <GradientStop Color="#FFFCFCFD" Offset="0.16"/>
-                    <GradientStop Color="#FF1B1A1A" Offset="1"/>
-                </LinearGradientBrush>
-            </Calendar.Background>
-        </Calendar>
+                      SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+
+                <Calendar.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFE4EAF0" Offset="0"/>
+                        <GradientStop Color="#FFECF0F4" Offset="0.16"/>
+                        <GradientStop Color="#FFFCFCFD" Offset="0.16"/>
+                        <GradientStop Color="#FF1B1A1A" Offset="1"/>
+                    </LinearGradientBrush>
+                </Calendar.Background>
+
+            </Calendar>
         </Viewbox>
-        <Button x:Name="buttonTrening" Grid.Column="0" Content="Dodaj dzień treningowy"
-                Height="65.5" Margin="40,0,35.33,94.047"
+        <Label x:Name="ErrorLabel" Content="{Binding ErrorString}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,261,35,0" Width="381" Foreground="White" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="buttonTrening" Grid.Column="0" Content="Add trening day"
+                Height="66" Margin="40,0,35,31"
                 Style="{DynamicResource ApplicationButtonStyle}" VerticalAlignment="Bottom"
-                FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.5,0.5"  Command="{Binding NavigatedCommand}" CommandParameter="DzienTreningowy" >
+                FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.5,0.5"  Command="{Binding NavigateWorkOutDay}" CommandParameter="DzienTreningowy" >
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -118,10 +123,10 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button  x:Name="buttonNieTrening" Grid.Column="0" Content="Dodaj dzień nietreningowy"
-                 Height="67" Margin="40,0,35.33,164.547" Style="{DynamicResource ApplicationButtonStyle}"
+        <Button  x:Name="buttonNieTrening" Grid.Column="0" Content="Add no trening day"
+                 Height="66" Margin="40,0,35,122" Style="{DynamicResource ApplicationButtonStyle}"
                  VerticalAlignment="Bottom" Foreground="#FF0E0000" FontWeight="Bold" FontSize="14"  
-                 RenderTransformOrigin="0.5,0.5"  Command="{Binding NavigatedCommand}" CommandParameter="DzienNieTreningowy"  >
+                 RenderTransformOrigin="0.5,0.5"  Command="{Binding NavigateNoWorkOutDay}" CommandParameter="DzienNieTreningowy"  >
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -131,8 +136,48 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-       
-            <ContentControl Grid.Column="1" prism:RegionManager.RegionName="ContentRegion"/>
+
+        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="ContentRegion"/>
+
+        <Button  x:Name="LoginButton" Grid.Column="0" Content="Login"
+                Height="66" Margin="40,0,35,304" Style="{DynamicResource ApplicationButtonStyle}"
+                VerticalAlignment="Bottom" Foreground="#FF0E0000" FontWeight="Bold" FontSize="14"  
+                RenderTransformOrigin="0.5,0.5"  Command="{Binding Login}" CommandParameter="Login"  >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button  x:Name="RegisterButton" Grid.Column="0" Content="Register"
+            Height="66" Margin="40,0,35,395" Style="{DynamicResource ApplicationButtonStyle}"
+            VerticalAlignment="Bottom" Foreground="#FF0E0000" FontWeight="Bold" FontSize="14"  
+            RenderTransformOrigin="0.5,0.5"  Command="{Binding Register}" CommandParameter="Registeration"  >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button  x:Name="LogOut" Grid.Column="0" Content="Logout"
+            Height="68" Margin="40,0,35,215" Style="{DynamicResource ApplicationButtonStyle}"
+            VerticalAlignment="Bottom" Foreground="#FF0E0000" FontWeight="Bold" FontSize="14"  
+            RenderTransformOrigin="0.5,0.5"  Command="{Binding LogOut}" CommandParameter="Login"  >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
 
 
 

@@ -18,6 +18,7 @@ namespace ProgramTreningowyWPF.Views
             base.OnStartup(e);
             var bs = new Bootstrapper();
             bs.Run(); //startujemy
+           
         }
     }
 }

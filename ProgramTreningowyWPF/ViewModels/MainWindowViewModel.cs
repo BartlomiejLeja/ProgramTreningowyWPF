@@ -13,36 +13,137 @@ using System.Windows;
 using System.Windows.Data;
 using Prism.Events;
 using ProgramTreningowyWPF.Events;
+using ProgramTreningowyWPF.Models;
 
 namespace ProgramTreningowyWPF.ViewModels
 {
    public class MainWindowViewModel:BindableBase//PrismMvvm
     {
-        public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator,IEventAggregator eventAggregator1) //regiony żebyśmy mogli manipulowac view
-        {
-            _eventAggregator1 = eventAggregator;                                                                                 //IEventAggregator do event aggregator czyli do przekazywania wartości pomiedzy viewmodelami
-            _eventAggregator = eventAggregator;
-            _regonManager = regionManager; // typiarz manipuluje regionami
-            NavigatedCommand = new DelegateCommand<string>(Navigate);// manipuluje stringami powinnienem obietkami
-            Proba = new DelegateCommand(Execute,CanExecute).ObservesProperty(()=>SelectedDate);//using Prism.Commands nowy prismowy sposób na komendy łatwiejszy
-        }                                                                  //ObserveProperty żeby patrzyło czy się zmienia włąściwośc i na to reagowało można pare po . każde
 
-        private IEventAggregator _eventAggregator1;
+        private string _loginString; //włóaściwość prismowa
+        public string LoginString
+        {
+            get { return _loginString; }
+
+            set { SetProperty(ref _loginString, value); }
+
+        }
+
+        private string _errorString; //włóaściwość prismowa
+        public string ErrorString
+        {
+            get { return _errorString; }
+
+            set { SetProperty(ref _errorString, value); }
+
+        }
+
+
+
+        private PersonSet _selectedPerson; //włóaściwość prismowa
+        public PersonSet SelectedPerson
+        {
+            get { return _selectedPerson; }
+
+            set { SetProperty(ref _selectedPerson, value); }
+
+        }
+
+        private bool _isActive; //włóaściwość prismowa
+        public bool isActive
+        {
+            get { return _isActive; }
+
+            set { SetProperty(ref _isActive, value); }
+
+        }
+
+
+
+        public DelegateCommand Login { get; set; } //using system.windows.input
+        public DelegateCommand NavigateToGraf { get; set; } //using system.windows.input
+        public DelegateCommand NavigateNoWorkOutDay { get; set; } //using system.windows.input
+        public DelegateCommand NavigateWorkOutDay { get; set; } //using system.windows.input
+        public DelegateCommand LogOut { get; set; } //using system.windows.input
+        public DelegateCommand Register { get; set; } //using system.windows.input
         private IEventAggregator _eventAggregator;
         private readonly IRegionManager _regonManager;
         public DelegateCommand<string> NavigatedCommand { get; set; }
+        public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator) //regiony żebyśmy mogli manipulowac view
+        {
+            LoginString = "You are not login, please login to see your data";
+            isActive = false; 
+            _regonManager = regionManager; // typiarz manipuluje regionami
+            //Comends
+            NavigatedCommand = new DelegateCommand<string>(Navigate);// manipuluje stringami powinnienem obietkami
+            NavigateToGraf = new DelegateCommand(Execute,CanExecute).ObservesProperty(()=>SelectedDate);//using Prism.Commands nowy prismowy sposób na komendy łatwiejszy
+            NavigateNoWorkOutDay = new DelegateCommand(ExecuteNavigateNoWorkOutDay, CanExecuteNavigateNoWorkOutDay).ObservesProperty(() => isActive);
+            NavigateWorkOutDay = new DelegateCommand(ExecuteNavigateWorkOutDay, CanExecuteNavigateWorkOutDay).ObservesProperty(() => isActive);
+            Login = new DelegateCommand(ExecuteLogin, CanExecuteLogin).ObservesProperty(() => isActive);
+            LogOut=new DelegateCommand(ExecuteLogOut, CanExecuteLogOut).ObservesProperty(() => isActive);
+            Register = new DelegateCommand(ExecuteRegister);
+            //Eventy
+            _eventAggregator = eventAggregator;   //IEventAggregator do event aggregator czyli do przekazywania wartości pomiedzy viewmodelami
+            _eventAggregator.GetEvent<IsActive>().Subscribe((obj) => isActive = (bool)obj);
+            _eventAggregator.GetEvent<LoginString>().Subscribe((obj) => LoginString = (string)obj);
+            _eventAggregator.GetEvent<ErrorString>().Subscribe((obj) => ErrorString = (string)obj);
+            _eventAggregator.GetEvent<WrongLoginString>().Subscribe((obj) => ErrorString = (string)obj);
+            _eventAggregator.GetEvent<RegisterString>().Subscribe((obj) => ErrorString = (string)obj);
+            _eventAggregator.GetEvent<RestDayAddString>().Subscribe((obj) => ErrorString = (string)obj);
+            _eventAggregator.GetEvent<PersonEvent>().Subscribe((obj) => SelectedPerson = (PersonSet)obj); //ObserveProperty żeby patrzyło czy się zmienia włąściwośc i na to reagowało można pare po . każde
+
+        }
+
+        private void ExecuteRegister()
+        {
+            Navigate("Registeration");
+        }
+
+        private bool CanExecuteLogOut()
+        {
+            return isActive;
+        }
+
+        private void ExecuteLogOut()
+        {
+            isActive = false;
+            LoginString = "You are not login";
+            Navigate("Login");
+        }
+
+        private bool CanExecuteLogin()
+        {
+            return !isActive;
+        }
+
+        private void ExecuteLogin()
+        {
+            Navigate("Login");
+        }
+
+        private bool CanExecuteNavigateWorkOutDay()
+        {
+            return isActive;
+        }
+
+        private void ExecuteNavigateWorkOutDay()
+        {
+            Navigate("DzienTreningowy");
+        }
+
+        private bool CanExecuteNavigateNoWorkOutDay()
+        {
+            return isActive;
+        }
+
+        private void ExecuteNavigateNoWorkOutDay()
+        {
+            Navigate("DzienNieTreningowy");
+        }
 
         private void Navigate(string uri)
         {
             _regonManager.RequestNavigate("ContentRegion", uri);
-          
-          
-            using (Models.WorkOutEntities contex = new Models.WorkOutEntities())
-            {
-                var pToView = (from c in contex.p where c.Dzień == SelectedDate select c).FirstOrDefault();
-                _eventAggregator1.GetEvent<DayEvent>().Publish(pToView);//wysłam event czyli przesyłam wartość pToView tam gdzie będzie subscribe
-            }
-         
         }
 
 
@@ -53,6 +154,40 @@ namespace ProgramTreningowyWPF.ViewModels
 
         private void Execute()//tu rzeczy które będziemy robić 
         {
+           
+            using (Models.WorkOut2Container contex = new Models.WorkOut2Container())
+            {
+                if (SelectedPerson != null)
+                {
+                    var noTreningDayToSend = (from c in contex.PersonNoTreningDaySetSet where c.Date == SelectedDate && c.PersonSetId == SelectedPerson.Id select c).FirstOrDefault();
+                    var treningDayToSend = (from c in contex.PersonTreningDaySetSet where c.Date == SelectedDate && c.PersonSetId == SelectedPerson.Id select c).FirstOrDefault();
+                    if (noTreningDayToSend != null)
+                    {
+                        _eventAggregator.GetEvent<DayEvent>().Publish(noTreningDayToSend);//wysłam event czyli przesyłam wartość pToView tam gdzie będzie subscribe
+                        this.Navigate("Graf");
+                    }
+                    else if (treningDayToSend != null)
+                    {
+                        this.Navigate("GrafWorkOutDay");
+                        _eventAggregator.GetEvent<WorkOutDayEvent>().Publish(treningDayToSend);//wysłam event czyli przesyłam wartość pToView tam gdzie będzie subscribe
+
+
+                    }
+                    else
+                    {
+                        //MessageBox.Show("W tym dniu nie było ani treningu ani odpoczynku!");
+                        ErrorString = "You haven't got any data on this day";
+
+                    }
+                }
+                else
+                {
+                   // MessageBox.Show("You must be login to show the data");
+                    ErrorString = "You must be login to show the data";
+                }
+
+            
+            }
             
         }
 
@@ -66,7 +201,7 @@ namespace ProgramTreningowyWPF.ViewModels
         }
 
 
-       public DelegateCommand Proba { get; set; } //using system.windows.input
+      
 
        
 

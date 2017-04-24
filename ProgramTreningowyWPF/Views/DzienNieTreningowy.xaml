@@ -10,6 +10,58 @@
              Height="Auto" Width="Auto">
     <!--    xmlns:prism="http://prismlibrary.com/" trzeba nuget ściągnąc prism.wpf-->
     <!--  prism:ViewModelLocator.AutoWireViewModel="True" aby się bindingowały Views z Views model i nic więcej nie trzeba robić yupi -->
+
+    <UserControl.Resources>
+        <Style x:Key="ApplicationButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="#FFE6EAEE" Opacity="0.7" Stroke="Black" StrokeThickness="3"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Resources>
+                <Storyboard x:Key="up">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" >
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="down">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" >
+                        <EasingDoubleKeyFrame KeyTime="0" Value="1.2"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="1.2"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </Style.Resources>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="UIElement.MouseEnter" >
+                    <BeginStoryboard x:Name="up_BeginStoryboard" Storyboard="{StaticResource up}"/>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="UIElement.MouseLeave" >
+                    <BeginStoryboard x:Name="down_BeginStoryboard" Storyboard="{StaticResource down}"/>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+
     <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
             <Grid.RowDefinitions>
@@ -64,7 +116,16 @@
             </RichTextBox>
 
             <Button   x:Name="AddDay"  Grid.Column="1" Grid.Row="11" Style="{DynamicResource ApplicationButtonStyle}" Content="Dodaj dzień" 
-                      Command="{Binding AddDay}" ></Button>
+                      Command="{Binding AddDay}" RenderTransformOrigin="0.5,0.5" >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
 
         </Grid>
     </Viewbox>

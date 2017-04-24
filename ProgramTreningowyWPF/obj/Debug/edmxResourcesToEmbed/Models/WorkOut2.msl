@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WorkOut2StoreContainer" CdmEntityContainer="WorkOut2Container">
+    <EntitySetMapping Name="PersonSetSet">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkOut2.PersonSet)">
+        <MappingFragment StoreEntitySet="PersonSetSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonTreningDaySetSet">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkOut2.PersonTreningDaySet)">
+        <MappingFragment StoreEntitySet="PersonTreningDaySetSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Exercises" ColumnName="Exercises" />
+          <ScalarProperty Name="Diet" ColumnName="Diet" />
+          <ScalarProperty Name="Supplementation" ColumnName="Supplementation" />
+          <ScalarProperty Name="PersonSetId" ColumnName="PersonSetId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonPhotoSetSet">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkOut2.PersonPhotoSet)">
+        <MappingFragment StoreEntitySet="PersonPhotoSetSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="PersonTreningDaySetId" ColumnName="PersonTreningDaySetId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonNoTreningDaySetSet">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkOut2.PersonNoTreningDaySet)">
+        <MappingFragment StoreEntitySet="PersonNoTreningDaySetSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Diet" ColumnName="Diet" />
+          <ScalarProperty Name="PersonSetId" ColumnName="PersonSetId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

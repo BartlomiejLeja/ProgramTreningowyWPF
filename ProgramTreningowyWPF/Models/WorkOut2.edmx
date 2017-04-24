@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WorkOut2.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="WorkOut2StoreContainer">
+    <EntitySet Name="PersonSetSet" EntityType="WorkOut2.Store.PersonSetSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonTreningDaySetSet" EntityType="WorkOut2.Store.PersonTreningDaySetSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonPhotoSetSet" EntityType="WorkOut2.Store.PersonPhotoSetSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonNoTreningDaySetSet" EntityType="WorkOut2.Store.PersonNoTreningDaySetSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PersonSetPersonNoTreningDaySet" Association="WorkOut2.Store.PersonSetPersonNoTreningDaySet">
+      <End Role="PersonSet" EntitySet="PersonSetSet" />
+      <End Role="PersonNoTreningDaySet" EntitySet="PersonNoTreningDaySetSet" />
+    </AssociationSet>
+    <AssociationSet Name="PersonSetPersonTreningDaySet" Association="WorkOut2.Store.PersonSetPersonTreningDaySet">
+      <End Role="PersonSet" EntitySet="PersonSetSet" />
+      <End Role="PersonTreningDaySet" EntitySet="PersonTreningDaySetSet" />
+    </AssociationSet>
+    <AssociationSet Name="PersonTreningDaySetPersonPhotoSet" Association="WorkOut2.Store.PersonTreningDaySetPersonPhotoSet">
+      <End Role="PersonTreningDaySet" EntitySet="PersonTreningDaySetSet" />
+      <End Role="PersonPhotoSet" EntitySet="PersonPhotoSetSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="PersonSetSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonTreningDaySetSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="true" />
+    <Property Name="Weight" Type="float" Nullable="true" />
+    <Property Name="Exercises" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Diet" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Supplementation" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PersonSetId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonPhotoSetSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Photo" Type="varbinary(max)" Nullable="true" />
+    <Property Name="PersonTreningDaySetId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonNoTreningDaySetSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="true" />
+    <Property Name="Weight" Type="float" Nullable="true" />
+    <Property Name="Diet" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PersonSetId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="PersonSetPersonNoTreningDaySet">
+    <End Role="PersonSet" Type="WorkOut2.Store.PersonSetSet" Multiplicity="1" />
+    <End Role="PersonNoTreningDaySet" Type="WorkOut2.Store.PersonNoTreningDaySetSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonNoTreningDaySet">
+        <PropertyRef Name="PersonSetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonSetPersonTreningDaySet">
+    <End Role="PersonSet" Type="WorkOut2.Store.PersonSetSet" Multiplicity="1" />
+    <End Role="PersonTreningDaySet" Type="WorkOut2.Store.PersonTreningDaySetSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonTreningDaySet">
+        <PropertyRef Name="PersonSetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonTreningDaySetPersonPhotoSet">
+    <End Role="PersonTreningDaySet" Type="WorkOut2.Store.PersonTreningDaySetSet" Multiplicity="1" />
+    <End Role="PersonPhotoSet" Type="WorkOut2.Store.PersonPhotoSetSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonTreningDaySet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonPhotoSet">
+        <PropertyRef Name="PersonTreningDaySetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="WorkOut2" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="WorkOut2Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PersonSetSet" EntityType="WorkOut2.PersonSet" />
+          <EntitySet Name="PersonTreningDaySetSet" EntityType="WorkOut2.PersonTreningDaySet" />
+          <EntitySet Name="PersonPhotoSetSet" EntityType="WorkOut2.PersonPhotoSet" />
+          <EntitySet Name="PersonNoTreningDaySetSet" EntityType="WorkOut2.PersonNoTreningDaySet" />
+          <AssociationSet Name="PersonSetPersonNoTreningDaySet" Association="WorkOut2.PersonSetPersonNoTreningDaySet">
+            <End Role="PersonSet" EntitySet="PersonSetSet" />
+            <End Role="PersonNoTreningDaySet" EntitySet="PersonNoTreningDaySetSet" />
+          </AssociationSet>
+          <AssociationSet Name="PersonSetPersonTreningDaySet" Association="WorkOut2.PersonSetPersonTreningDaySet">
+            <End Role="PersonSet" EntitySet="PersonSetSet" />
+            <End Role="PersonTreningDaySet" EntitySet="PersonTreningDaySetSet" />
+          </AssociationSet>
+          <AssociationSet Name="PersonTreningDaySetPersonPhotoSet" Association="WorkOut2.PersonTreningDaySetPersonPhotoSet">
+            <End Role="PersonTreningDaySet" EntitySet="PersonTreningDaySetSet" />
+            <End Role="PersonPhotoSet" EntitySet="PersonPhotoSetSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PersonSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <NavigationProperty Name="PersonNoTreningDaySet" Relationship="WorkOut2.PersonSetPersonNoTreningDaySet" FromRole="PersonSet" ToRole="PersonNoTreningDaySet" />
+          <NavigationProperty Name="PersonTreningDaySet" Relationship="WorkOut2.PersonSetPersonTreningDaySet" FromRole="PersonSet" ToRole="PersonTreningDaySet" />
+        </EntityType>
+        <EntityType Name="PersonTreningDaySet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="true" />
+          <Property Name="Weight" Type="Double" Nullable="true" />
+          <Property Name="Exercises" Type="String" Nullable="true" />
+          <Property Name="Diet" Type="String" Nullable="true" />
+          <Property Name="Supplementation" Type="String" Nullable="true" />
+          <NavigationProperty Name="PersonSet" Relationship="WorkOut2.PersonSetPersonTreningDaySet" FromRole="PersonTreningDaySet" ToRole="PersonSet" />
+          <Property Name="PersonSetId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PersonPhotoSet" Relationship="WorkOut2.PersonTreningDaySetPersonPhotoSet" FromRole="PersonTreningDaySet" ToRole="PersonPhotoSet" />
+        </EntityType>
+        <EntityType Name="PersonPhotoSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="Binary" Nullable="true" />
+          <NavigationProperty Name="PersonTreningDaySet" Relationship="WorkOut2.PersonTreningDaySetPersonPhotoSet" FromRole="PersonPhotoSet" ToRole="PersonTreningDaySet" />
+          <Property Name="PersonTreningDaySetId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonNoTreningDaySet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="true" />
+          <Property Name="Weight" Type="Double" Nullable="true" />
+          <Property Name="Diet" Type="String" Nullable="true" />
+          <NavigationProperty Name="PersonSet" Relationship="WorkOut2.PersonSetPersonNoTreningDaySet" FromRole="PersonNoTreningDaySet" ToRole="PersonSet" />
+          <Property Name="PersonSetId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="PersonSetPersonNoTreningDaySet">
+          <End Type="WorkOut2.PersonSet" Role="PersonSet" Multiplicity="1" />
+          <End Type="WorkOut2.PersonNoTreningDaySet" Role="PersonNoTreningDaySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonNoTreningDaySet">
+              <PropertyRef Name="PersonSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PersonSetPersonTreningDaySet">
+          <End Type="WorkOut2.PersonSet" Role="PersonSet" Multiplicity="1" />
+          <End Type="WorkOut2.PersonTreningDaySet" Role="PersonTreningDaySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonTreningDaySet">
+              <PropertyRef Name="PersonSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PersonTreningDaySetPersonPhotoSet">
+          <End Type="WorkOut2.PersonTreningDaySet" Role="PersonTreningDaySet" Multiplicity="1" />
+          <End Type="WorkOut2.PersonPhotoSet" Role="PersonPhotoSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonTreningDaySet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonPhotoSet">
+              <PropertyRef Name="PersonTreningDaySetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WorkOut2StoreContainer" CdmEntityContainer="WorkOut2Container">
+    <EntitySetMapping Name="PersonSetSet">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkOut2.PersonSet)">
+        <MappingFragment StoreEntitySet="PersonSetSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonTreningDaySetSet">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkOut2.PersonTreningDaySet)">
+        <MappingFragment StoreEntitySet="PersonTreningDaySetSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Exercises" ColumnName="Exercises" />
+          <ScalarProperty Name="Diet" ColumnName="Diet" />
+          <ScalarProperty Name="Supplementation" ColumnName="Supplementation" />
+          <ScalarProperty Name="PersonSetId" ColumnName="PersonSetId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonPhotoSetSet">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkOut2.PersonPhotoSet)">
+        <MappingFragment StoreEntitySet="PersonPhotoSetSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="PersonTreningDaySetId" ColumnName="PersonTreningDaySetId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonNoTreningDaySetSet">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkOut2.PersonNoTreningDaySet)">
+        <MappingFragment StoreEntitySet="PersonNoTreningDaySetSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Diet" ColumnName="Diet" />
+          <ScalarProperty Name="PersonSetId" ColumnName="PersonSetId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
